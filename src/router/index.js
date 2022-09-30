@@ -1,17 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import EventListView from '@/views/EventListView.vue'
-import EventEditView from '@/views/event/EventEditView.vue'
-import EventRegisterView from '@/views/event/EventRegisterView.vue'
-import AboutView from '../views/AboutView.vue'
-import EventLayoutView from '@/views/event/EventLayoutView.vue'
-import EventDetailView from '@/views/event/EventDetailView.vue'
-import NotFoundView from '@/views/NotFoundView.vue'
-import NetWorkErrorView from '@/views/NetworkErrorView.vue'
-import AddEvent from '@/views/EventForm.vue'
-import NProgress from 'nprogress'
-import GStore from '@/store'
-import EventService from '@/services/EventService'
-import OrganizerService from '@/services/OrganizerService.js'
+import { createRouter, createWebHistory } from 'vue-router';
+import EventListView from '@/views/EventListView.vue';
+import EventEditView from '@/views/event/EventEditView.vue';
+import EventRegisterView from '@/views/event/EventRegisterView.vue';
+import AboutView from '../views/AboutView.vue';
+import EventLayoutView from '@/views/event/EventLayoutView.vue';
+import EventDetailView from '@/views/event/EventDetailView.vue';
+import NotFoundView from '@/views/NotFoundView.vue';
+import NetWorkErrorView from '@/views/NetworkErrorView.vue';
+import AddEvent from '@/views/EventForm.vue';
+import NProgress from 'nprogress';
+import GStore from '@/store';
+import EventService from '@/services/EventService';
+import OrganizerService from '@/services/OrganizerService.js';
 const routes = [
   {
     path: '/',
@@ -31,18 +31,18 @@ const routes = [
     beforeEnter: (to) => {
       return EventService.getEvent(to.params.id)
         .then((response) => {
-          GStore.event = response.data
+          GStore.event = response.data;
         })
         .catch((error) => {
           if (error.response && error.response.start == 404) {
             return {
               name: '404Resource',
               parames: { resource: 'event' }
-            }
+            };
           } else {
-            return { name: 'NetworkError' }
+            return { name: 'NetworkError' };
           }
-        })
+        });
     },
     props: true,
     children: [
@@ -73,12 +73,12 @@ const routes = [
     beforeEnter: () => {
       return OrganizerService.getOrganizers()
         .then((response) => {
-          GStore.organizers = response.data
+          GStore.organizers = response.data;
         })
         .catch(() => {
-          GStore.organizers = null
-          console.log('cannot load organizer')
-        })
+          GStore.organizers = null;
+          console.log('cannot load organizer');
+        });
     }
   },
   {
@@ -97,25 +97,25 @@ const routes = [
     name: 'NetworkError',
     component: NetWorkErrorView
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     } else {
-      return { top: 0 }
+      return { top: 0 };
     }
   }
-})
+});
 router.beforeEach(() => {
-  NProgress.start()
-})
+  NProgress.start();
+});
 
 router.afterEach(() => {
-  NProgress.done()
-})
+  NProgress.done();
+});
 
-export default router
+export default router;

@@ -6,7 +6,7 @@
     v-bind="{
       ...$attrs,
       onChange: ($event) => {
-        $emit('update:modelValue', $event.target.value)
+        $emit('update:modelValue', $event.target.value);
       }
     }"
   >
@@ -37,5 +37,5 @@ export default {
       required: true
     }
   }
-}
+};
 </script>

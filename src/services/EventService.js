@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const apiClient = axios.create({
   baseURL: process.env.VUE_APP_BACKEND_URL,
@@ -7,21 +7,21 @@ const apiClient = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json'
   }
-})
+});
 
 export default {
   getEvents(perPage, page) {
-    return apiClient.get('/event?_limit=' + perPage + '&_page=' + page)
+    return apiClient.get('/event?_limit=' + perPage + '&_page=' + page);
   },
   getEvent(id) {
-    return apiClient.get('/event/' + id)
+    return apiClient.get('/event/' + id);
   },
   saveEvent(event) {
-    return apiClient.post('/event', event)
+    return apiClient.post('/event', event);
   },
-  getEventByKetword(keyword, perPage, page) {
+  getEventByKeyword(keyword, perPage, page) {
     return apiClient.get(
       'event?_limit=' + perPage + '&_page=' + page + '&title=' + keyword
-    )
+    );
   }
-}
+};

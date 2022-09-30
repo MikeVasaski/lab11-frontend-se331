@@ -1,11 +1,11 @@
 <template>
   <label v-if="label">{{ label }}</label>
   <input
-    :value="modelValue"
-    :placeholder="label"
-    @input="inputHandlers($event)"
-    v-bind="$attrs"
     class="field"
+    :placeholder="label"
+    :value="modelValue"
+    @input="inputHandler($event)"
+    v-bind="$attrs"
   />
 </template>
 
@@ -21,10 +21,10 @@ export default {
       default: ''
     },
     methods: {
-      inputHandlers(event) {
-        this.$emit('update: modelValue', event.target.value)
+      inputHandler(event) {
+        this.$emit('update: modelValue', event.target.value);
       }
     }
   }
-}
+};
 </script>
